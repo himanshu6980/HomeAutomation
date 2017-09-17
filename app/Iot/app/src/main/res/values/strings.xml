@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Iot</string>
+    <string name="enter_device_name">Device Name</string>
+    <string name="create_button_text">Create</string>
 </resources>

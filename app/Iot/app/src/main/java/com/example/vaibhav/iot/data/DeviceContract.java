@@ -25,7 +25,7 @@ public class DeviceContract {
         public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " (" +
                 _ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 COLUMN_DATE + " INTEGER, " +
-                COLUMN_DEVICE_NAME + "TEXT NOT NULL, " +
+                COLUMN_DEVICE_NAME + " TEXT NOT NULL, " +
 
                 /*
                  * To ensure this table can only contain one weather entry per date, we declare

@@ -64,6 +64,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
 
         DeviceViewHolder(View itemView) {
             super(itemView);
+            deviceName = itemView.findViewById(R.id.device_name);
             itemView.setOnClickListener(this);
         }
 
