@@ -21,11 +21,15 @@ public class DeviceContract {
         public static final String TABLE_NAME = "devices";
         public static final String COLUMN_DATE = "date";
         public static final String COLUMN_DEVICE_NAME = "name";
+        public static final String COLUMN_LAST_TRIGGERED = "lastTriggered";
+        public static final String COLUMN_DEVICE_STATE = "state";
 
         public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " (" +
                 _ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 COLUMN_DATE + " INTEGER, " +
                 COLUMN_DEVICE_NAME + " TEXT NOT NULL, " +
+                COLUMN_LAST_TRIGGERED + " INTEGER, " +
+                COLUMN_DEVICE_STATE + " INTEGER DEFAULT 0, " +
 
                 /*
                  * To ensure this table can only contain one weather entry per date, we declare

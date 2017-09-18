@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         //setting recyclerview
         devicesRecyclerView = mainBinding.devicesRecyclerView;
-        devicesAdapter = new DevicesAdapter();
+        devicesAdapter = new DevicesAdapter(this);
         devicesRecyclerView.setAdapter(devicesAdapter);
         devicesLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         devicesRecyclerView.setLayoutManager(devicesLayoutManager);

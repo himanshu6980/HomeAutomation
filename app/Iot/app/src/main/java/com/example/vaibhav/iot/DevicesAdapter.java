@@ -1,5 +1,7 @@
 package com.example.vaibhav.iot;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.vaibhav.iot.data.DeviceContract;
+import com.example.vaibhav.iot.data.IotDbHelper;
 
 /**
  * Created by Vaibhav on 9/18/2017.
@@ -18,8 +21,10 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
     private static final String TAG = DevicesAdapter.class.getName();
 
     private Cursor mCursor;
+    private Context mContext;
 
-    DevicesAdapter(){
+    DevicesAdapter(Context context){
+        mContext = context;
         //default constructor
     }
 
@@ -30,16 +35,39 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
     }
 
     @Override
-    public void onBindViewHolder(DeviceViewHolder holder, int position) {
+    public void onBindViewHolder(final DeviceViewHolder holder, int position) {
 
         if( mCursor == null || !mCursor.moveToFirst() ){
             Log.i(TAG,"Either cursor is null or number of rows = 0");
             return;
         }
 
+        mCursor.moveToPosition(position);
         //set device name:
         String deviceName = mCursor.getString(mCursor.getColumnIndex(DeviceContract.DeviceEntry.COLUMN_DEVICE_NAME));
         holder.deviceName.setText(deviceName);
+
+        //set device trigger state:
+
+        int isChecked = mCursor.getInt(mCursor.getColumnIndex(DeviceContract.DeviceEntry.COLUMN_DEVICE_STATE));
+        holder.deviceTrigger.setChecked(isChecked==1);
+
+        //set device trigger:
+        holder.id = mCursor.getInt(mCursor.getColumnIndex(DeviceContract.DeviceEntry._ID));
+        holder.deviceTrigger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //save time and update database:
+                IotDbHelper dbHelper = new IotDbHelper(mContext);
+                String whereClause = DeviceContract.DeviceEntry._ID + " = " + holder.id;
+
+                ContentValues values = new ContentValues();
+                values.put(DeviceContract.DeviceEntry.COLUMN_LAST_TRIGGERED, System.currentTimeMillis());
+                values.put(DeviceContract.DeviceEntry.COLUMN_DEVICE_STATE, (holder.deviceTrigger.isChecked()) ? 1 : 0);
+
+                dbHelper.getWritableDatabase().update(DeviceContract.DeviceEntry.TABLE_NAME,values,whereClause,null);
+            }
+        });
     }
 
     @Override
@@ -61,10 +89,12 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
 
         TextView deviceName;
         SwitchCompat deviceTrigger;
+        int id;
 
         DeviceViewHolder(View itemView) {
             super(itemView);
             deviceName = itemView.findViewById(R.id.device_name);
+            deviceTrigger = itemView.findViewById(R.id.device_trigger);
             itemView.setOnClickListener(this);
         }
 

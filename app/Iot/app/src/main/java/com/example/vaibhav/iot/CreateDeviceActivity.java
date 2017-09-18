@@ -35,10 +35,13 @@ public class CreateDeviceActivity extends AppCompatActivity {
     private void save(){
         EditText deviceNameView = findViewById(R.id.name);
         String deviceName = deviceNameView.getText().toString();
+        long deviceDateCreated = System.currentTimeMillis();
 
         //enter this info in database
         ContentValues values = new ContentValues();
         values.put(DeviceContract.DeviceEntry.COLUMN_DEVICE_NAME, deviceName);
+        values.put(DeviceContract.DeviceEntry.COLUMN_DATE, deviceDateCreated);
+        values.put(DeviceContract.DeviceEntry.COLUMN_LAST_TRIGGERED, deviceDateCreated);
         IotDbHelper helper = new IotDbHelper(this);
 
         long count = helper.getWritableDatabase().insert(DeviceContract.DeviceEntry.TABLE_NAME, null, values);
