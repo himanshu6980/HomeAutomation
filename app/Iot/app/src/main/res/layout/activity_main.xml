@@ -1,28 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.example.vaibhav.iot.MainActivity">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:clipToPadding="false"
-            android:id="@+id/devices_recycler_view"
+        <RelativeLayout
+            android:id="@+id/main_content"
             android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/tool_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:elevation="4dp"
+                    android:background="@android:color/holo_blue_dark">
+
+                    <TextView
+                        android:id="@+id/toolbarLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        style="@style/Toolbar.TitleText"
+                        android:text="HAS enabled Devices"/>
+
+                </android.support.v7.widget.Toolbar>
+
+                <android.support.v7.widget.RecyclerView
+                    android:clipToPadding="false"
+                    android:id="@+id/devices_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/holo_blue_light"/>
+
+            </LinearLayout>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:src="@android:drawable/ic_input_add"
+                android:clickable="true"/>
+
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="@dimen/drawer_width"
             android:layout_height="match_parent"
-            android:background="@android:color/holo_blue_light"/>
+            android:layout_gravity="start"
+            />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:src="@android:drawable/ic_input_add"
-            android:clickable="true"/>
-
-    </RelativeLayout>
+    </android.support.v4.widget.DrawerLayout>
 </layout>

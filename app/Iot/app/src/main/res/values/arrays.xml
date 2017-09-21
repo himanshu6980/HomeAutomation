@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="drawer_array">
+        <item>"Settings"</item>
+        <item>"About Us"</item>
+        <item>"Send Us Feedback"</item>
+        <item>"Privacy Policy"</item>
+        <item>"Terms and Conditions"</item>
+        <item>"Sign Out"</item>
+    </array>
+</resources>

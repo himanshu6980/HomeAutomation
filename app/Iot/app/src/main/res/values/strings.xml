@@ -2,4 +2,10 @@
     <string name="app_name">Iot</string>
     <string name="enter_device_name">Device Name</string>
     <string name="create_button_text">Create</string>
+
+    <!-- DRAWER MAIN ACTIVITY-->
+    <string name="open_drawer">Open navigation drawer</string>
+    <string name="closeDrawer">Close navigation drawer</string>
+    <string name="email">user email</string>
+    <string name="password">user password</string>
 </resources>

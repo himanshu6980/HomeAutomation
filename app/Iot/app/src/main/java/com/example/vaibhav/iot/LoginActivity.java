@@ -1,7 +1,9 @@
 package com.example.vaibhav.iot;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -26,8 +28,10 @@ public class LoginActivity extends AppCompatActivity {
         Button button_Login;
         final ProgressBar progressBar;
         firebaseAuth = FirebaseAuth.getInstance();
-
         setContentView(R.layout.activity_login);
+
+        final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
         email = (EditText)findViewById(R.id.email_login);
         password = (EditText)findViewById(R.id.password_login);
         progressBar = (ProgressBar)findViewById(R.id.progress_bar_login);
@@ -57,9 +61,11 @@ public class LoginActivity extends AppCompatActivity {
                             password.setError("Enter Correct Password");
                         }
                         else {
+                            Toast.makeText(LoginActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
+                            sharedPref.edit().putString(getString(R.string.email),email.getText().toString()).apply();
+                            sharedPref.edit().putString(getString(R.string.password),password.getText().toString()).apply();
                             Intent i = new Intent(LoginActivity.this,MainActivity.class);
                             startActivity(i);
-                            Toast.makeText(LoginActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
                         }
                         progressBar.setVisibility(View.INVISIBLE);
                     }
@@ -76,5 +82,13 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        String emailString = sharedPref.getString(getString(R.string.email),null);
+        String passwordString = sharedPref.getString(getString(R.string.password),null);
+        if(emailString!=null && passwordString!=null){
+            email.setText(emailString);
+            password.setText(passwordString);
+            button_Login.callOnClick();
+        }
     }
 }
