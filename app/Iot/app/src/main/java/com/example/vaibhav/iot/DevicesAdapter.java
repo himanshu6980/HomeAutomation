@@ -100,6 +100,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
 
         @Override
         public void onClick(View v) {
+            //do something here:
         }
     }
 }
