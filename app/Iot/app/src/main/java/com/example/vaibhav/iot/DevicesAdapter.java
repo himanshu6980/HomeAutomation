@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.vaibhav.iot.data.DeviceContract;
 import com.example.vaibhav.iot.data.IotDbHelper;
+import com.example.vaibhav.iot.utilities.Trigger;
 
 /**
  * Created by Vaibhav on 9/18/2017.
@@ -52,6 +53,10 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
         int isChecked = mCursor.getInt(mCursor.getColumnIndex(DeviceContract.DeviceEntry.COLUMN_DEVICE_STATE));
         holder.deviceTrigger.setChecked(isChecked==1);
 
+        //set device type and port number:
+        holder.deviceType = mCursor.getInt(mCursor.getColumnIndex(DeviceContract.DeviceEntry.COLUMN_DEVICE_TYPE));
+        holder.portNumber = mCursor.getInt(mCursor.getColumnIndex(DeviceContract.DeviceEntry.COLUMN_DEVICE_PORT_NUMBER));
+
         //set device trigger:
         holder.id = mCursor.getInt(mCursor.getColumnIndex(DeviceContract.DeviceEntry._ID));
         holder.deviceTrigger.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +71,9 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
                 values.put(DeviceContract.DeviceEntry.COLUMN_DEVICE_STATE, (holder.deviceTrigger.isChecked()) ? 1 : 0);
 
                 dbHelper.getWritableDatabase().update(DeviceContract.DeviceEntry.TABLE_NAME,values,whereClause,null);
+
+                //send trigger:
+                Trigger.triggerDevice(holder.deviceType,holder.portNumber);
             }
         });
     }
@@ -89,7 +97,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
 
         TextView deviceName;
         SwitchCompat deviceTrigger;
-        int id;
+        int id, deviceType, portNumber;
 
         DeviceViewHolder(View itemView) {
             super(itemView);

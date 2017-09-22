@@ -9,7 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding mainBinding;
     DevicesAdapter devicesAdapter;
-    LinearLayoutManager devicesLayoutManager;
+    GridLayoutManager devicesLayoutManager;
 
     ActionBarDrawerToggle mDrawerToggle;
 
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         //setting recyclerview
         devicesAdapter = new DevicesAdapter(this);
         mainBinding.devicesRecyclerView.setAdapter(devicesAdapter);
-        devicesLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        devicesLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false);
         mainBinding.devicesRecyclerView.setLayoutManager(devicesLayoutManager);
 
         IotDbHelper helper = new IotDbHelper(this);

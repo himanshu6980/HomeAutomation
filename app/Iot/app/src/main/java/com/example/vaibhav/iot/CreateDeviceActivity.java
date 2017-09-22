@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.vaibhav.iot.data.DeviceContract;
@@ -19,7 +20,6 @@ public class CreateDeviceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_device);
 
         Button button = findViewById(R.id.create_button);
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,12 +36,17 @@ public class CreateDeviceActivity extends AppCompatActivity {
         EditText deviceNameView = findViewById(R.id.name);
         String deviceName = deviceNameView.getText().toString();
         long deviceDateCreated = System.currentTimeMillis();
+        Spinner deviceTypeSpinner = findViewById(R.id.device_type_spinner);
+        EditText devicePortNumberView = findViewById(R.id.device_port_number);
+        int devicePortNumber = Integer.valueOf(devicePortNumberView.getText().toString());
 
         //enter this info in database
         ContentValues values = new ContentValues();
         values.put(DeviceContract.DeviceEntry.COLUMN_DEVICE_NAME, deviceName);
         values.put(DeviceContract.DeviceEntry.COLUMN_DATE, deviceDateCreated);
         values.put(DeviceContract.DeviceEntry.COLUMN_LAST_TRIGGERED, deviceDateCreated);
+        values.put(DeviceContract.DeviceEntry.COLUMN_DEVICE_TYPE, deviceTypeSpinner.getSelectedItem().toString());
+        values.put(DeviceContract.DeviceEntry.COLUMN_DEVICE_PORT_NUMBER, devicePortNumber);
         IotDbHelper helper = new IotDbHelper(this);
 
         long count = helper.getWritableDatabase().insert(DeviceContract.DeviceEntry.TABLE_NAME, null, values);

@@ -13,11 +13,29 @@
         android:textSize="12sp"
         android:hint="@string/enter_device_name"/>
 
+    <EditText
+        android:id="@+id/device_port_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:textSize="12sp"
+        android:hint="@string/enter_port_number"
+        android:inputType="number"/>
+
+    <Spinner
+        android:id="@+id/device_type_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/device_type_array"
+        android:prompt="@string/device_type_prompt" />
+
     <Button
         android:id="@+id/create_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/create_button_text"/>
+
+
 
 </LinearLayout>
