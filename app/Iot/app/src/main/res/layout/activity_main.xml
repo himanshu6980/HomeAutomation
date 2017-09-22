@@ -24,8 +24,9 @@
 
                     <TextView
                         android:id="@+id/toolbarLocation"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         style="@style/Toolbar.TitleText"
                         android:text="HAS enabled Devices"/>
 
@@ -47,6 +48,7 @@
                 android:layout_margin="@dimen/fab_margin"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:src="@android:drawable/ic_input_add"
                 android:clickable="true"/>
 
