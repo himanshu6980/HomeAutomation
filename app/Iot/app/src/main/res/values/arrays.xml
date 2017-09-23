@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="drawer_array">
+    <string-array name="drawer_array">
         <item>"Settings"</item>
         <item>"About Us"</item>
         <item>"Send Us Feedback"</item>
         <item>"Privacy Policy"</item>
         <item>"Terms and Conditions"</item>
         <item>"Sign Out"</item>
-    </array>
+    </string-array>
+
+    <string-array name="device_type_array">
+        <item>Bulb</item>
+        <item>Fan</item>
+        <item>Tubelight</item>
+        <item>Geyser</item>
+        <item>Refrigerator</item>
+        <item>Coffee Maker</item>
+        <item>Microwave</item>
+        <item>TV</item>
+    </string-array>
 </resources>

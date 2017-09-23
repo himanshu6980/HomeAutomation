@@ -8,4 +8,9 @@
     <string name="closeDrawer">Close navigation drawer</string>
     <string name="email">user email</string>
     <string name="password">user password</string>
+
+    <!--CREATE DEVICE SPINNER DEVICE TYPE-->
+    <string name="device_type_prompt">Device Type</string>
+    <string name="enter_port_number">Enter device port number</string>
 </resources>
+

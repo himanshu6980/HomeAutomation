@@ -2,6 +2,7 @@ package com.example.vaibhav.iot;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.vaibhav.iot.data.DeviceContract;
 import com.example.vaibhav.iot.data.IotDbHelper;
+import com.example.vaibhav.iot.utilities.Trigger;
 
 /**
  * Created by Vaibhav on 9/18/2017.
@@ -52,6 +54,10 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
         int isChecked = mCursor.getInt(mCursor.getColumnIndex(DeviceContract.DeviceEntry.COLUMN_DEVICE_STATE));
         holder.deviceTrigger.setChecked(isChecked==1);
 
+        //set device type and port number:
+        holder.deviceType = mCursor.getString(mCursor.getColumnIndex(DeviceContract.DeviceEntry.COLUMN_DEVICE_TYPE));
+        holder.portNumber = mCursor.getInt(mCursor.getColumnIndex(DeviceContract.DeviceEntry.COLUMN_DEVICE_PORT_NUMBER));
+
         //set device trigger:
         holder.id = mCursor.getInt(mCursor.getColumnIndex(DeviceContract.DeviceEntry._ID));
         holder.deviceTrigger.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +72,9 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
                 values.put(DeviceContract.DeviceEntry.COLUMN_DEVICE_STATE, (holder.deviceTrigger.isChecked()) ? 1 : 0);
 
                 dbHelper.getWritableDatabase().update(DeviceContract.DeviceEntry.TABLE_NAME,values,whereClause,null);
+
+                //send trigger:
+                Trigger.triggerDevice(holder.deviceType,holder.portNumber);
             }
         });
     }
@@ -89,7 +98,8 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
 
         TextView deviceName;
         SwitchCompat deviceTrigger;
-        int id;
+        int id, portNumber;
+        String deviceType;
 
         DeviceViewHolder(View itemView) {
             super(itemView);
@@ -101,6 +111,13 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
         @Override
         public void onClick(View v) {
             //do something here:
+            Intent i = new Intent(mContext,DeviceDetailActivity.class);
+            i.putExtra("deviceName",deviceName.getText().toString());
+            i.putExtra("deviceState",deviceTrigger.isChecked());
+            i.putExtra("deviceId",id);
+            i.putExtra("deviceType",deviceType);
+            i.putExtra("portNumber",portNumber);
+            mContext.startActivity(i);
         }
     }
 }
