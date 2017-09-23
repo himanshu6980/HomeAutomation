@@ -22,7 +22,7 @@ public class Trigger {
     private static String socketAddress;
     private static int PORT_NUMBER = 3001;
 
-    public static void triggerDevice(final int deviceType, int portNumber) {
+    public static void triggerDevice(final String deviceType, int portNumber) {
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference ipReference = firebaseDatabase.getReference("ip");

@@ -2,6 +2,7 @@ package com.example.vaibhav.iot;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
@@ -54,7 +55,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
         holder.deviceTrigger.setChecked(isChecked==1);
 
         //set device type and port number:
-        holder.deviceType = mCursor.getInt(mCursor.getColumnIndex(DeviceContract.DeviceEntry.COLUMN_DEVICE_TYPE));
+        holder.deviceType = mCursor.getString(mCursor.getColumnIndex(DeviceContract.DeviceEntry.COLUMN_DEVICE_TYPE));
         holder.portNumber = mCursor.getInt(mCursor.getColumnIndex(DeviceContract.DeviceEntry.COLUMN_DEVICE_PORT_NUMBER));
 
         //set device trigger:
@@ -97,7 +98,8 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
 
         TextView deviceName;
         SwitchCompat deviceTrigger;
-        int id, deviceType, portNumber;
+        int id, portNumber;
+        String deviceType;
 
         DeviceViewHolder(View itemView) {
             super(itemView);
@@ -109,6 +111,13 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
         @Override
         public void onClick(View v) {
             //do something here:
+            Intent i = new Intent(mContext,DeviceDetailActivity.class);
+            i.putExtra("deviceName",deviceName.getText().toString());
+            i.putExtra("deviceState",deviceTrigger.isChecked());
+            i.putExtra("deviceId",id);
+            i.putExtra("deviceType",deviceType);
+            i.putExtra("portNumber",portNumber);
+            mContext.startActivity(i);
         }
     }
 }
