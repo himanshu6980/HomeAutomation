@@ -12,6 +12,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.DataOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
@@ -22,7 +23,7 @@ public class Trigger {
     private static String socketAddress;
     private static int PORT_NUMBER = 3001;
 
-    public static void triggerDevice(final String deviceType, int portNumber) {
+    public static void triggerDevice(final String deviceType, final int portNumber) {
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference ipReference = firebaseDatabase.getReference("ip");
@@ -41,8 +42,11 @@ public class Trigger {
                     protected Void doInBackground(Void... params) {
                         try {
                             Socket s = new Socket(socketAddress, PORT_NUMBER);
-                            PrintWriter writer = new PrintWriter(s.getOutputStream());
-                            writer.print(deviceType);
+                            DataOutputStream dout = new DataOutputStream(s.getOutputStream());
+                            dout.writeUTF(deviceType + " " + portNumber);
+                            dout.flush();
+                            dout.close();
+                            s.close();
                             Log.i(LOG_TAG, "device triggered successfully");
                         } catch (Exception err) {
                             err.printStackTrace();
