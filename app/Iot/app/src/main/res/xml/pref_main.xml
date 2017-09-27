@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="General">
+
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="Day MOde "
+            android:summary="Activate day mode preferences"
+            android:title="Day Mode" />
+
+        <ListPreference
+            android:defaultValue="3"
+            android:dialogTitle="Select Mode"
+            android:entries="@array/mode_selection"
+            android:entryValues="@array/mode_selection_values"
+            android:key="Selection"
+            android:summary="make selection of home mode"
+            android:title="Weather Mode" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Notification">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="Notification status "
+            android:title="notification sound" />
+
+        <RingtonePreference
+            android:defaultValue="content://settings/system/notification_sound"
+            android:dependency=""
+            android:key="new notification masage sound"
+            android:ringtoneType="notification"
+            android:summary="choose ringtone"
+            android:title="Ringtone " />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="vibrate "
+            android:summary="make notification vibrate"
+            android:title="Vibrate" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="About">
+
+        <Preference
+            android:selectable="false"
+            android:summary="This applicatin is being developed group of programming anthusiast as group projest of collage" />
+
+        <Preference
+            android:summary="1.0"
+            android:title="Virsion" />
+
+
+    </PreferenceCategory>
+</PreferenceScreen>

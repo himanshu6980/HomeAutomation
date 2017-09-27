@@ -63,6 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 if (!task.isSuccessful()) {
                                     Toast.makeText(SignUpActivity.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
+                                    progressBar.setVisibility(View.INVISIBLE);
                                 } else {
                                     startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
                                     finish();

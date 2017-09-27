@@ -2,6 +2,8 @@ package com.example.vaibhav.iot;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,14 +30,17 @@ public class LoginActivity extends AppCompatActivity {
         final EditText email,password;
         Button button_Login;
         final ProgressBar progressBar;
-        firebaseAuth = FirebaseAuth.getInstance();
+
+
         setContentView(R.layout.activity_login);
 
-        final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        firebaseAuth = FirebaseAuth.getInstance();
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
         email = (EditText)findViewById(R.id.email_login);
         password = (EditText)findViewById(R.id.password_login);
-        progressBar = (ProgressBar)findViewById(R.id.progress_bar_login);
+        progressBar = (ProgressBar)findViewById(R.id.progressBarhorizontal);
+        progressBar.setProgressTintList(ColorStateList.valueOf(Color.YELLOW));
         progressBar.setVisibility(View.INVISIBLE);
         button_Login =(Button)findViewById(R.id.button_login);
         button_Login.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 progressBar.setVisibility(View.VISIBLE);
 
+
                 firebaseAuth.signInWithEmailAndPassword(email_value,password_value).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -59,11 +66,12 @@ public class LoginActivity extends AppCompatActivity {
                         {
                             email.setError("Enter Correct Email");
                             password.setError("Enter Correct Password");
+                            progressBar.setVisibility(View.INVISIBLE);
                         }
                         else {
                             Toast.makeText(LoginActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
-                            sharedPref.edit().putString(getString(R.string.email),email.getText().toString()).apply();
-                            sharedPref.edit().putString(getString(R.string.password),password.getText().toString()).apply();
+                           // sharedPref.edit().putString(getString(R.string.email),email.getText().toString()).apply();
+                            //sharedPref.edit().putString(getString(R.string.password),password.getText().toString()).apply();
                             Intent i = new Intent(LoginActivity.this,MainActivity.class);
                             startActivity(i);
                         }
@@ -74,8 +82,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Button registerButton = findViewById(R.id.signup_button_login);
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        TextView textView_SignUp = (TextView)findViewById(R.id.signup_text);
+        textView_SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(LoginActivity.this,SignUpActivity.class);

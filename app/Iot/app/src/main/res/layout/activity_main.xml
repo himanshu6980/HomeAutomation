@@ -8,7 +8,8 @@
         <RelativeLayout
             android:id="@+id/main_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -20,7 +21,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:elevation="4dp"
-                    android:background="@android:color/holo_blue_dark">
+                    android:background="#009688">
 
                     <TextView
                         android:id="@+id/toolbarLocation"
@@ -37,12 +38,13 @@
                     android:id="@+id/devices_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@android:color/holo_blue_light"/>
+                    android:background="#009688"/>
 
             </LinearLayout>
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab"
+                android:backgroundTint="#FBC02D"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/fab_margin"

@@ -22,6 +22,7 @@ public class Trigger {
 
     private static String socketAddress;
     private static int PORT_NUMBER = 3001;
+    private static int task;
 
     public static void triggerDevice(final String deviceType, final int portNumber) {
 
@@ -40,18 +41,8 @@ public class Trigger {
                 AsyncTask asyncTask = new AsyncTask<Void,Void,Void>() {
                     @Override
                     protected Void doInBackground(Void... params) {
-                        try {
-                            Socket s = new Socket(socketAddress, PORT_NUMBER);
-                            DataOutputStream dout = new DataOutputStream(s.getOutputStream());
-                            dout.writeUTF(deviceType + " " + portNumber);
-                            dout.flush();
-                            dout.close();
-                            s.close();
-                            Log.i(LOG_TAG, "device triggered successfully");
-                        } catch (Exception err) {
-                            err.printStackTrace();
-                            Log.i(LOG_TAG, "error: " + err);
-                        }
+                        Client client = new Client(socketAddress,portNumber,1);
+                        client.connect();
                         return null;
                     }
                 }.execute();

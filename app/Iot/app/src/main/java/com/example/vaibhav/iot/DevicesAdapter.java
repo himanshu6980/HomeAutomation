@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
@@ -11,19 +12,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+import com.example.vaibhav.iot.utilities.Client;
 
 import com.example.vaibhav.iot.data.DeviceContract;
 import com.example.vaibhav.iot.data.IotDbHelper;
 import com.example.vaibhav.iot.utilities.Trigger;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by Vaibhav on 9/18/2017.
  */
+
 public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceViewHolder> {
     private static final String TAG = DevicesAdapter.class.getName();
-
+    FirebaseDatabase firebaseDatabase;
     private Cursor mCursor;
     private Context mContext;
+    private String ip_Value;
+    private int task;
+    private int GPIO_NO;
 
     DevicesAdapter(Context context){
         mContext = context;
@@ -66,6 +78,32 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
                 //save time and update database:
                 IotDbHelper dbHelper = new IotDbHelper(mContext);
                 String whereClause = DeviceContract.DeviceEntry._ID + " = " + holder.id;
+
+                //get ip from firebase and call the client for connection with server
+                firebaseDatabase = FirebaseDatabase.getInstance();
+                DatabaseReference reference_ip = firebaseDatabase.getReference("ip");
+                reference_ip.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                       ip_Value = dataSnapshot.getValue(String.class);
+                        Log.d("IP","Ip_value is "+ip_Value);
+                       // Toast.makeText(DevicesAdapter.this,ip_Value,Toast.LENGTH_SHORT);
+                        task = (holder.deviceTrigger.isChecked())?1:0;
+                        GPIO_NO=holder.portNumber;
+                      /*  AsyncTask<Void,Void,Void>
+                        {
+
+                        }*/
+                        Client client = new Client(ip_Value,GPIO_NO,task);
+                        client.connect();
+                        Log.d("Server Connection","Connection to server Sucessfull");
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
 
                 ContentValues values = new ContentValues();
                 values.put(DeviceContract.DeviceEntry.COLUMN_LAST_TRIGGERED, System.currentTimeMillis());

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
@@ -23,6 +24,8 @@ import android.widget.Toast;
 import com.example.vaibhav.iot.data.DeviceContract;
 import com.example.vaibhav.iot.data.IotDbHelper;
 import com.example.vaibhav.iot.databinding.ActivityMainBinding;
+import com.example.vaibhav.iot.utilities.AlarmActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,10 +34,20 @@ public class MainActivity extends AppCompatActivity {
     GridLayoutManager devicesLayoutManager;
 
     ActionBarDrawerToggle mDrawerToggle;
+    FirebaseAuth firebaseAuth;
+    String currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        firebaseAuth = FirebaseAuth.getInstance();
+
+
+        if (firebaseAuth.getCurrentUser()==null)
+        {
+            startActivity(new Intent(MainActivity.this,LoginActivity.class));
+        }
+
         setContentView(R.layout.activity_main);
 
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
@@ -65,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void configureDrawer() {
-        DrawerLayout mDrawerLayout = findViewById(R.id.drawer_layout);
+        final DrawerLayout mDrawerLayout = findViewById(R.id.drawer_layout);
         final RelativeLayout mainContent = findViewById(R.id.main_content);
         final ListView listView = findViewById(R.id.listview);
         mDrawerToggle = new ActionBarDrawerToggle(
@@ -91,7 +104,9 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.drawer_item,getResources().getStringArray(R.array.drawer_array));
+        //adapter.add("Hello "+firebaseAuth.getCurrentUser());
         listView.setAdapter(adapter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -99,9 +114,39 @@ public class MainActivity extends AppCompatActivity {
                 switch (text){
                     case "Settings":
                         Toast.makeText(MainActivity.this,"Settings clicked",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this,SettingActivity.class));
                         break;
                     //TODO: to be done by HIMANSHU
                     //TODO: for signout, you will need to clear the shared preferences for email and password
+                    case "Home Alarm":
+                        Toast.makeText(MainActivity.this, "Launching Home Alarm",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this,AlarmActivity.class));
+                        break;
+                    case "About Us":
+                        Toast.makeText(MainActivity.this,"Collab With Us",Toast.LENGTH_SHORT).show();
+                        break;
+                    case "Send Us Feedback":
+                        Intent email_intent = new Intent(Intent.ACTION_SEND);
+                        email_intent.setType("text/html");
+                        email_intent.putExtra(Intent.EXTRA_EMAIL, "udayrajonweb@gmail.com");
+                        email_intent.putExtra(Intent.EXTRA_SUBJECT, "Application Feedback");
+
+
+                        startActivity(Intent.createChooser(email_intent, "Send Email"));
+                        break;
+                    case "Collab With Us":
+                        String url = "https://github.com/codervs/iot";
+                        Intent web_intent = new Intent(Intent.ACTION_VIEW);
+                        web_intent.setData(Uri.parse(url));
+                        startActivity(web_intent);
+                        break;
+                    case "Sign Out":
+                        firebaseAuth.signOut();
+                        Toast.makeText(MainActivity.this,"Logged Out Succesfully",Toast.LENGTH_LONG).show();
+                        mDrawerLayout.closeDrawers();
+                        startActivity(new Intent(MainActivity.this,LoginActivity.class));
+
+
                 }
             }
         });

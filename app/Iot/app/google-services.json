@@ -103,6 +103,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "411505046512-mn2a2lpmoa10nhpp2r58l0okp4n67es4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vaibhav.iot",
+            "certificate_hash": "273bbef94e78d9b090a7c3ab62c5418fb391397e"
+          }
+        },
+        {
           "client_id": "411505046512-eh4kpf07u2cv7skbvn8551rd1rso5v9k.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

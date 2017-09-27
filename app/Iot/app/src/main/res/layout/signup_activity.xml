@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#009688"
     >
 
     <EditText
         android:id="@+id/email_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
         android:ems="10"
         android:hint="Email"
+        android:backgroundTint="#FBC02D"
         android:inputType="textEmailAddress"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/password_signup"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -22,40 +24,62 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        android:layout_below="@+id/email_signup"
-        android:layout_alignStart="@+id/email_signup"
-        android:layout_marginTop="39dp"
-        android:layout_alignLeft="@+id/email_signup"/>
+        android:backgroundTint="#FBC02D"
+        android:layout_above="@+id/confirm_password_signup"
+        android:layout_alignStart="@+id/email_signup" />
 
     <EditText
         android:id="@+id/confirm_password_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/password_signup"
-        android:layout_below="@+id/password_signup"
-        android:layout_marginTop="44dp"
         android:ems="10"
+        android:backgroundTint="#FBC02D"
         android:hint="Confirm Password"
         android:inputType="numberPassword"
-        android:layout_alignLeft="@+id/password_signup"/>
+        android:layout_alignBottom="@+id/signup_button_signup"
+        android:layout_alignStart="@+id/password_signup"
+        android:layout_marginBottom="68dp" />
 
     <Button
         android:id="@+id/signup_button_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:background="@android:color/transparent"
         android:text="SignUp"
-        android:layout_below="@+id/confirm_password_signup"
-        android:layout_centerHorizontal="true"/>
+        android:layout_marginBottom="41dp"
+        android:layout_above="@+id/progress_bar_signup"
+        android:layout_centerHorizontal="true" />
 
     <ProgressBar
         android:id="@+id/progress_bar_signup"
-        style="?android:attr/progressBarStyle"
+        style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+        android:indeterminate="true"
+        android:indeterminateTint="#FBC02D"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/signup_button_signup"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/confirm_password_signup"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="34dp"
+        android:layout_alignEnd="@+id/confirm_password_signup" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/smart_home"
+        android:layout_marginBottom="72dp"
+        android:layout_above="@+id/password_signup"
+        android:layout_alignStart="@+id/email_signup" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello!"
+        android:textSize="50sp"
+        android:layout_marginBottom="42dp"
+        android:layout_above="@+id/imageView2"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
