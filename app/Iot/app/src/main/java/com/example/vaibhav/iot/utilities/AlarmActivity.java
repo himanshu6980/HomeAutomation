@@ -26,7 +26,7 @@ public class AlarmActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm);
-        TextView textViewHourAndMInute;
+        final TextView textViewHourAndMInute;
         final FragmentManager fragmentManager = getSupportFragmentManager();
         EditText editTextMsg;
         Button buttonsetAlarm;
@@ -42,6 +42,7 @@ public class AlarmActivity extends AppCompatActivity {
         // textViewHourAndMInute.setText(date);
 
         textViewHourAndMInute.setText(today.format("%k:%M"));
+        String Time_1 = textViewHourAndMInute.getText().toString();
 
         textViewHourAndMInute.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +55,9 @@ public class AlarmActivity extends AppCompatActivity {
         buttonsetAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AlarmActivity.this,"ALarm Activated",Toast.LENGTH_SHORT).show();
+                String Time_2 = textViewHourAndMInute.getText().toString();
+
+
             }
         });
 
