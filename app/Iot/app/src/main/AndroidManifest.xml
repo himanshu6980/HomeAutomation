@@ -24,7 +24,8 @@
         <activity android:name=".DeviceDetailActivity" />
         <activity android:name=".utilities.AlarmActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".ForgotPasswordActivity"></activity>
     </application>
 
 </manifest>

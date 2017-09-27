@@ -30,11 +30,16 @@ public class LoginActivity extends AppCompatActivity {
         final EditText email,password;
         Button button_Login;
         final ProgressBar progressBar;
-
-
-        setContentView(R.layout.activity_login);
+        TextView textView_reset_password;
 
         firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser()!=null) {
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
+        setContentView(R.layout.activity_login);
+
+
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
         email = (EditText)findViewById(R.id.email_login);
@@ -43,6 +48,13 @@ public class LoginActivity extends AppCompatActivity {
         progressBar.setProgressTintList(ColorStateList.valueOf(Color.YELLOW));
         progressBar.setVisibility(View.INVISIBLE);
         button_Login =(Button)findViewById(R.id.button_login);
+        textView_reset_password = (TextView)findViewById(R.id.forgot_text);
+        textView_reset_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this,ForgotPasswordActivity.class));
+            }
+        });
         button_Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
