@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
 
-        
+
 
         setContentView(R.layout.activity_main);
 
@@ -142,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this,"Logged Out Succesfully",Toast.LENGTH_LONG).show();
                         mDrawerLayout.closeDrawers();
                         startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                        finish();
 
 
                 }
