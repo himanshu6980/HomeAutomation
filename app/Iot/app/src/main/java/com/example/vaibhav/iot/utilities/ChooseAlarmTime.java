@@ -31,7 +31,7 @@ public class ChooseAlarmTime extends DialogFragment implements TimePickerDialog.
         final Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
-        return new TimePickerDialog(getActivity(),this, hour, minute,
+        return new TimePickerDialog(getActivity(),R.style.DialogTheme,this, hour, minute,
                 DateFormat.is24HourFormat(getActivity()));
     }
 

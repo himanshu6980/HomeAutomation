@@ -15,7 +15,7 @@ import com.example.vaibhav.iot.MainActivity;
 import com.example.vaibhav.iot.R;
 
 public class SplashActivitry extends Activity {
-    private static int SPLASH_TIME_OUT=4000;
+    private static int SPLASH_TIME_OUT=3000;
 
 
     @Override
