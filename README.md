@@ -1,2 +1,1 @@
-# iot
-IOT project for OODA (Object Oriented Analysis and Design)
+ A Android Application to control Home Appliances using Raspberry Pi.
