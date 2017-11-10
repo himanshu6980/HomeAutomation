@@ -150,11 +150,13 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
         public void onClick(View v) {
             //do something here:
             Intent i = new Intent(mContext,DeviceDetailActivity.class);
+
             i.putExtra("deviceName",deviceName.getText().toString());
             i.putExtra("deviceState",deviceTrigger.isChecked());
             i.putExtra("deviceId",id);
             i.putExtra("deviceType",deviceType);
             i.putExtra("portNumber",portNumber);
+
             mContext.startActivity(i);
         }
     }

@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 float moveFactor = (listView.getWidth() * slideOffset);
 
                 mainContent.setTranslationX(moveFactor);
+
             }
 
 
@@ -113,6 +114,10 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this,"Settings clicked",Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(MainActivity.this,SettingActivity.class));
                         break;
+
+
+
+
                     //TODO: to be done by HIMANSHU
                     //TODO: for signout, you will need to clear the shared preferences for email and password
                     case "Home Alarm":
