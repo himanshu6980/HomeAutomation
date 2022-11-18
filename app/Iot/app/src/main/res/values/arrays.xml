@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="drawer_array">
+        <item>"Home Alarm"</item>
+        <item>"Settings"</item>
+        <item>"Collab With Us"</item>
+        <item>"Send Us Feedback"</item>
+        <item>"Privacy Policy"</item>
+        <item>"Terms and Conditions"</item>
+        <item>"Sign Out"</item>
+    </string-array>
+
+    <string-array name="device_type_array">
+        <item>Bulb</item>
+        <item>Fan</item>
+        <item>Tubelight</item>
+        <item>Geyser</item>
+        <item>Refrigerator</item>
+        <item>Coffee Maker</item>
+        <item>Microwave</item>
+        <item>TV</item>
+    </string-array>
+    <string-array name="mode_selection"
+        >
+        <item>Winter</item>
+        <item>Summer</item>
+        <item>Moderate</item>
+        <item>Custom</item>
+    </string-array>
+    <string-array name="mode_selection_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+</resources>

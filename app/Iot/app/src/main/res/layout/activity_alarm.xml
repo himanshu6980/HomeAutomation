@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#009688">
+
+    <TextView
+        android:id="@+id/textView_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="102dp"
+        android:text="00:00"
+        android:textSize="100sp" />
+
+    <EditText
+        android:id="@+id/editText_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView_hour"
+        android:layout_below="@+id/textView_hour"
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:hint="Alarm Msg"
+        android:backgroundTint="#FBC02D"
+        android:inputType="textPersonName"
+        android:textAlignment="textStart"
+        android:layout_alignEnd="@+id/textView_hour" />
+
+    <Button
+        android:id="@+id/button_setAlarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/editText_msg"
+        android:layout_below="@+id/editText_msg"
+        android:layout_marginEnd="75dp"
+        android:layout_marginTop="47dp"
+        android:background="#FBC02D"
+        android:text="Set Alarm"
+        android:textColor="#009688"/>
+</RelativeLayout>
